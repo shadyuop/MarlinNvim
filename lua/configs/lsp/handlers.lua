@@ -34,7 +34,7 @@ function M.setup()
 end
 
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
     vim.api.nvim_create_autocmd("CursorHold", {
       group = "lsp_document_highlight",
@@ -65,7 +65,7 @@ M.on_attach = function(client, bufnr)
   vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, { desc = "Format file with LSP" })
 
   if client.name == "tsserver" or client.name == "jsonls" or client.name == "html" or client.name == "sumneko_lua" then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
   end
 
   local on_attach_override = require("core.utils").user_plugin_opts("lsp.on_attach", nil, false)
