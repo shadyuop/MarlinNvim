@@ -1,8 +1,8 @@
-<div align="center" id="madewithlua">
-    <img src="https://astronvim.github.io/img/logo/astronvim.svg" width="110", height="100">
-</div>
+<!-- <div align="center" id="madewithlua"> -->
+<!--     <img src="https://astronvim.github.io/img/logo/astronvim.svg" width="110", height="100"> -->
+<!-- </div> -->
 
-<h1 align="center">AstroNvim</h1>
+<h1 align="center">MarlinVim</h1>
 
 <div align="center"><p>
     <a href="https://github.com/AstroNvim/AstroNvim/pulse">
@@ -21,16 +21,9 @@
 </div>
 
 <p align="center">
-AstroNvim is an aesthetic and feature-rich neovim config that is extensible and easy to use with a great set of plugins
+MarlinVim is a forked AstroNvim which is an aesthetic and feature-rich neovim config that is extensible and easy to use with a great set of plugins, with added vsCode functionality
 </p>
 
-**REBRANDING NOTICE:** AstroVim will now be known as AstroNvim to clear up any confusion surrounding this being a Neovim configuration vs a Vim configuration. If you have used AstroNvim before the rebranding please run the following command to update your installation repo:
-
-```sh
-git -C ~/.config/nvim remote set-url origin https://github.com/AstroNvim/AstroNvim.git
-```
-
-> **Pre-v1.0 Notice:** If you were using AstroVim before the v1.0 release, please see the updated documentation because there were breaking changes.
 
 ## 🌟 Preview
 
@@ -70,15 +63,28 @@ git -C ~/.config/nvim remote set-url origin https://github.com/AstroNvim/AstroNv
 ## 🛠️ Installation
 
 #### Make a backup of your current nvim folder
+> for linux/mac
 
 ```
 mv ~/.config/nvim ~/.config/nvimbackup
 ```
+> for windows: powershell
+
+```
+mv ~\AppData\Local\nvim ~\AppData\Local\nvimbackup
+
+```
 
 #### Clone the repository
 
+> for linux/mac
 ```
-git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+git clone https://github.com/shadyuop/MarlinVim ~/.config/nvim
+nvim +PackerSync
+```
+> for windows
+```
+git clone https://github.com/shadyuop/MarlinVim ~/.config/nvimbackup
 nvim +PackerSync
 ```
 
@@ -118,6 +124,7 @@ Run `:AstroUpdate` to get the latest updates from the repository<br>
 
 Sincere appreciation to the following repositories, plugin authors and the entire neovim community out there that made the development of AstroNvim possible.
 
+- AstroNvim (https://github.com/AstroNvim/AstroNvim)
 - [Plugins](https://astronvim.github.io/acknowledgements#plugins-used-in-astronvim)
 - [NvChad](https://github.com/NvChad/NvChad)
 - [LunarVim](https://github.com/LunarVim)
