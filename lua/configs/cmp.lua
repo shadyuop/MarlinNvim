@@ -37,12 +37,47 @@ function M.config()
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
     end
 
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline("/", {
+      sources = {
+        { name = "buffer" },
+      },
+    })
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline(":", {
+      sources = {
+      { name = "cmdline" },
+      },
+    })
+
+
     cmp.setup(require("core.utils").user_plugin_opts("plugins.cmp", {
       preselect = cmp.PreselectMode.None,
+      source_priority = {
+      nvim_lsp = 1000,
+      luasnip = 750,
+      emoji = 700,
+      cmdline = 700,
+      lua = 700,
+      pandoc_references = 700,
+      latex_symbols = 700,
+      calc = 650,
+      path = 500,
+      buffer = 250,
+    },
       formatting = {
         fields = { "kind", "abbr", "menu" },
-        format = function(_, vim_item)
+        format = function(entry, vim_item)
+          -- Kind icons
           vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+          -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+          vim_item.menu = ({
+            nvim_lsp = "[LSP]",
+            nvim_lua = "[NVIM_LUA]",
+            luasnip = "[Snippet]",
+            buffer = "[Buffer]",
+            path = "[Path]",
+          })[entry.source.name]
           return vim_item
         end,
       },
@@ -67,6 +102,11 @@ function M.config()
           border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         },
       },
+      experimental = {
+        ghost_text = false,
+        native_menu = false,
+      },
+
       mapping = {
         ["<Up>"] = cmp.mapping.select_prev_item(),
         ["<Down>"] = cmp.mapping.select_next_item(),
