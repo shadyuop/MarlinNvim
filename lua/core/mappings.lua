@@ -252,6 +252,22 @@ if utils.is_available "nvim-toggleterm.lua" then
   map("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", { desc = "ToggleTerm vertical split" })
 end
 
+-- * Hop keymappings
+if utils.is_available "hop.nvim" then
+  map("n", "f", ":HopWord<cr>", { desc = "Hopping by Word" })
+  map("n", "F", ":HopLine<cr>", { desc = "Hopping by Line" })
+
+  map("v", "f", require("hop").hint_words, { desc = "Hopping Word vmode" })
+  -- hop in motion
+  local actions = { "d", "c", "<", ">", "y" }
+  for _, a in ipairs(actions) do
+    vim.keymap.set("n", a .. "f", a .. "<cmd>lua require'hop'.hint_char1()<cr>")
+  end
+end
+
+-- Normal mode by vim commands
+vim.cmd("nnoremap S :%s/")
+
 -- Stay in indent mode
 map("v", "<", "<gv", { desc = "unindent line" })
 map("v", ">", ">gv", { desc = "indent line" })
@@ -263,3 +279,6 @@ map("t", "<C-h>", "<c-\\><c-n><c-w>h", { desc = "Terminal left window navigation
 map("t", "<C-j>", "<c-\\><c-n><c-w>j", { desc = "Terminal down window navigation" })
 map("t", "<C-k>", "<c-\\><c-n><c-w>k", { desc = "Terminal up window navigation" })
 map("t", "<C-l>", "<c-\\><c-n><c-w>l", { desc = "Terminal right window naviation" })
+
+-- * In Every mode
+-- map("", "<F8>", ":TagbarToggle<CR>", { desc = "Toggle Tagbar" })

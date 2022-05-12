@@ -5,6 +5,8 @@ function M.config()
   if present then
     notify.setup(require("core.utils").user_plugin_opts("plugins.notify", {
       stages = "fade",
+      timeout = 1500,
+
     }))
 
     vim.notify = notify

@@ -6,6 +6,7 @@ function M.config()
     cinnamon.setup(require("core.utils").user_plugin_opts("plugins.cinnamon", {
       extra_keymaps = true,
       extended_keymaps = true,
+      default_delay = 4,
     }))
   end
 end
